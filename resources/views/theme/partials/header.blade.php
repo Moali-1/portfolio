@@ -32,7 +32,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach ($headerCategories as $category)
                                         <li class="nav-item"><a class="nav-link"
-                                                href="{{ route('theme.category') }}">{{ $category->name }}</a>
+                                                href="{{ route('theme.category', ['id' => $category->id]) }}">{{ $category->name }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -43,7 +43,9 @@
                     </ul>
 
                     <!-- Add new blog -->
-                    <a href="#" class="mr-2 btn btn-sm btn-primary">Add New</a>
+                    @if (Auth::check())
+                        <a href="{{ route('blogs.create') }}" class="mr-2 btn btn-sm btn-primary">Add New</a>
+                    @endif
                     <!-- End - Add new blog -->
 
                     <ul class="nav navbar-nav navbar-right navbar-social">
@@ -55,12 +57,14 @@
                                     aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} </a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('blogs.my-blogs') }}">My
+                                            Blogs</a>
                                     </li>
                                     <li class="nav-item">
-                                        <form action="{{ route('logout') }}" method="post">
+                                        <form action="{{ route('logout') }}" method="post" id="logout_form">
                                             @csrf
-                                            <a class="nav-link" href="javascript:$('form').submit();">Logout</a>
+                                            <a class="nav-link"
+                                                href="javascript:$('form#logout_form').submit();">Logout</a>
                                         </form>
                                     </li>
                                 </ul>

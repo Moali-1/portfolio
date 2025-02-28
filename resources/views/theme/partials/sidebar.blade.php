@@ -35,7 +35,8 @@
                 <ul class="mt-20 cat-list">
                     @foreach ($categories as $category)
                         <li>
-                            <a href="{{ route('theme.category') }}" class="d-flex justify-content-between">
+                            <a href="{{ route('theme.category', ['id' => $category->id]) }}"
+                                class="d-flex justify-content-between">
                                 <p>{{ $category->name }}</p>
                                 <p>(03)</p>
                             </a>
